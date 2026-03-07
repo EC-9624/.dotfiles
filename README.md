@@ -23,9 +23,3 @@ cd ~/.dotfiles
 ./dot stow
 ./dot doctor
 ```
-
-## Notes
-
-- Keep secrets in local-only files such as `~/.zshrc.local`.
-- `home/.config/opencode/opencode.json.tui-migration.bak` is intentionally tracked.
-- `home/.config/opencode/node_modules/` and `home/.config/opencode/resources/repos/` stay untracked.
