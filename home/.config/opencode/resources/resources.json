@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "resources": [
+    {
+      "name": "svelte",
+      "url": "https://github.com/sveltejs/svelte.dev",
+      "branch": "main",
+      "notes": "Svelte docs",
+      "scope": "global",
+      "clonedAt": "2026-01-07T06:29:14.340Z",
+      "updatedAt": "2026-03-06T06:06:22.061Z"
+    },
+    {
+      "name": "opencode",
+      "url": "https://github.com/anomalyco/opencode",
+      "branch": "dev",
+      "notes": "",
+      "scope": "global",
+      "clonedAt": "2026-01-09T08:54:59.811Z",
+      "updatedAt": "2026-03-06T06:06:23.394Z"
+    }
+  ]
+}

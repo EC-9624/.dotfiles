@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+yarn.lock
+pnpm-lock.yaml
+
+# Cloned library repos (they're already git repos)
+resources/repos/
+
+# OS files
+.DS_Store
+*.log
+*.tmp
+*.swp

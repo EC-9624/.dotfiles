@@ -1,0 +1,5 @@
+brew "fzf"
+brew "git"
+brew "opencode"
+brew "stow"
+brew "zoxide"

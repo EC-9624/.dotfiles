@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:${PATH}"
+
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+HOME_DIR="${DOTFILES_DIR}/home"
+PACKAGES_DIR="${DOTFILES_DIR}/packages"
+OPENCODE_DIR="${HOME_DIR}/.config/opencode"
+
+say() {
+  printf '%s\n' "$1"
+}
+
+fail() {
+  printf 'error: %s\n' "$1" >&2
+  exit 1
+}
+
+need_cmd() {
+  command -v "$1" >/dev/null 2>&1 || fail "missing command: $1"
+}
+
+install_packages() {
+  need_cmd brew
+  brew bundle --file="${PACKAGES_DIR}/bundle"
+}
+
+install_opencode_deps() {
+  if [[ ! -f "${OPENCODE_DIR}/package.json" ]]; then
+    return 0
+  fi
+
+  if command -v bun >/dev/null 2>&1; then
+    say "installing opencode plugin deps with bun"
+    bun install --cwd "${OPENCODE_DIR}"
+    return 0
+  fi
+
+  if command -v npm >/dev/null 2>&1; then
+    say "installing opencode plugin deps with npm"
+    npm install --prefix "${OPENCODE_DIR}"
+    return 0
+  fi
+
+  say "skipping opencode dependency install; bun or npm not found"
+}
+
+restow() {
+  need_cmd stow
+  stow -R -d "${DOTFILES_DIR}" -t "${HOME}" home
+}
+
+doctor() {
+  local missing=0
+  local commands=(brew git stow opencode fzf zoxide)
+
+  for cmd in "${commands[@]}"; do
+    if command -v "$cmd" >/dev/null 2>&1; then
+      say "ok: $cmd"
+    else
+      say "missing: $cmd"
+      missing=1
+    fi
+  done
+
+  if stow -n -R -d "${DOTFILES_DIR}" -t "${HOME}" home >/dev/null; then
+    say "ok: stow dry-run"
+  else
+    say "warning: stow dry-run reported conflicts"
+    missing=1
+  fi
+
+  return "$missing"
+}
+
+usage() {
+  cat <<'EOF'
+Usage: ./dot <command>
+
+Commands:
+  init    install bundle, install opencode deps, and stow files
+  stow    restow managed files into $HOME
+  doctor  check core commands and stow health
+EOF
+}
+
+main() {
+  local command="${1:-help}"
+
+  case "$command" in
+    init)
+      install_packages
+      install_opencode_deps
+      restow
+      ;;
+    stow)
+      restow
+      ;;
+    doctor)
+      doctor
+      ;;
+    help|-h|--help)
+      usage
+      ;;
+    *)
+      usage
+      fail "unknown command: $command"
+      ;;
+  esac
+}
+
+main "$@"
