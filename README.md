@@ -11,8 +11,8 @@ Personal dotfiles managed with GNU Stow.
 ## Bootstrap
 
 ```bash
-git clone <your-repo-url> ~/.dotfiles
-cd ~/.dotfiles
+ git clone <your-repo-url> ~/Code/dotfiles
+ cd ~/Code/dotfiles
 ./dot init
 ```
 

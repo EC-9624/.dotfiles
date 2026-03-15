@@ -11,7 +11,7 @@ const patternHasPathSeparator = (pattern: string): boolean => {
 
 export const matchesFullGlob = (
   relativeFilePath: string,
-  pattern: string
+  pattern: string,
 ): boolean => {
   const normalizedPath = normalizePathForGlob(relativeFilePath);
   const normalizedPattern = normalizePathForGlob(pattern);
@@ -24,13 +24,16 @@ export const matchesFullGlob = (
     return false;
   }
 
-  return path.matchesGlob(path.posix.basename(normalizedPath), normalizedPattern);
+  return path.matchesGlob(
+    path.posix.basename(normalizedPath),
+    normalizedPattern,
+  );
 };
 
 export const listRelativeFiles = (
   rootPath: string,
   excludedDirs: ReadonlySet<string>,
-  currentRelativePath = ""
+  currentRelativePath = "",
 ): string[] => {
   const currentPath = currentRelativePath
     ? path.join(rootPath, currentRelativePath)
