@@ -69,7 +69,7 @@ restow() {
 
 doctor() {
   local missing=0
-  local commands=(bat brew bun curl eza fd fnm fzf git starship stow unzip yazi zoxide zsh)
+  local commands=(bat brew bun curl eza fd fnm fzf git starship stow tmux unzip yazi zoxide zsh)
   local paths=(
     "${HOME}/.bun/_bun"
     "${HOME}/.oh-my-zsh/oh-my-zsh.sh"
