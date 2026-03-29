@@ -77,7 +77,7 @@ ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
   vi-add-eol
 )
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-bindkey -M viins '^Y' autosuggest-accept
+bindkey -M viins '^A' autosuggest-accept
 
 # syntax highlighting (keep this near the end of .zshrc)
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
