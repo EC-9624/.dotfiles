@@ -1,0 +1,40 @@
+#!/bin/sh
+
+battery_line=$(pmset -g batt 2>/dev/null | awk 'NR == 2 { print }')
+[ -n "$battery_line" ] || exit 0
+
+percent=$(printf '%s\n' "$battery_line" | awk '{gsub(/;/, "", $3); print $3}')
+[ -n "$percent" ] || exit 0
+
+value=${percent%%%}
+
+case $battery_line in
+  *charging*|*charged*)
+    icon='󰂄'
+    ;;
+  *)
+    if [ "$value" -ge 90 ]; then
+      icon='󰁹'
+    elif [ "$value" -ge 80 ]; then
+      icon='󰂂'
+    elif [ "$value" -ge 70 ]; then
+      icon='󰂁'
+    elif [ "$value" -ge 60 ]; then
+      icon='󰂀'
+    elif [ "$value" -ge 50 ]; then
+      icon='󰁿'
+    elif [ "$value" -ge 40 ]; then
+      icon='󰁾'
+    elif [ "$value" -ge 30 ]; then
+      icon='󰁽'
+    elif [ "$value" -ge 20 ]; then
+      icon='󰁼'
+    elif [ "$value" -ge 10 ]; then
+      icon='󰁻'
+    else
+      icon='󰂎'
+    fi
+    ;;
+esac
+
+printf '%s %s' "$icon" "$percent"

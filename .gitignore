@@ -9,3 +9,6 @@ home/.config/opencode/state/
 
 # OpenCode local runtime output
 .opencode/plans/
+
+# Local tmux plugins managed by TPM
+home/.config/tmux/plugins/
