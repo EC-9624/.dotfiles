@@ -35,27 +35,34 @@ syntect_theme = "~/.config/yazi/rose-pine.tmTheme"
 
 # : Status {{{
 
-[status]
-separator_open = ""
-separator_close = ""
-separator_style = { fg = "#2A273F", bg = "#2A273F" }
+[mode]
+normal_main = { fg = "#191724", bg = "#9ccfd8", bold = true }
+normal_alt  = { fg = "#9ccfd8", bg = "#1f1d2e" }
 
-# Mode
-mode_normal = { fg = "#191724", bg = "#ebbcba", bold = true }
-mode_select = { fg = "#e0def4", bg = "#9ccfd8", bold = true }
-mode_unset = { fg = "#e0def4", bg = "#b4637a", bold = true }
+# Select mode
+select_main = { fg = "#191724", bg = "#ebbcba", bold = true }
+select_alt  = { fg = "#ebbcba", bg = "#1f1d2e" }
+
+# Unset mode
+unset_main = { fg = "#191724", bg = "#eb6f92", bold = true }
+unset_alt  = { fg = "#eb6f92", bg = "#1f1d2e" }
+
+[status]
+overall   = { bg = "#191724" }
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+# Permissions
+perm_sep   = { fg = "#6e6a86" }
+perm_type  = { fg = "#9ccfd8" }
+perm_read  = { fg = "#f6c177" }
+perm_write = { fg = "#eb6f92" }
+perm_exec  = { fg = "#31748f" }
 
 # Progress
 progress_label = { fg = "#e0def4", bold = true }
-progress_normal = { fg = "#191724", bg = "#2A273F" }
-progress_error = { fg = "#B4637A", bg = "#2A273F" }
-
-# Permissions
-permissions_t = { fg = "#31748f" }
-permissions_r = { fg = "#f6c177" }
-permissions_w = { fg = "#B4637A" }
-permissions_x = { fg = "#9ccfd8" }
-permissions_s = { fg = "#524f67" }
+progress_normal = { fg = "#e0def4", bg = "#1f1d2e" }
+progress_error = { fg = "#eb6f92", bg = "#1f1d2e" }
 
 # : }}}
 
