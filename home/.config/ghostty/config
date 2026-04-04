@@ -1,6 +1,7 @@
 theme = Rose Pine
 macos-option-as-alt = true
-
+macos-titlebar-proxy-icon = hidden
+title = Ghostty
 # --- Typography ---
 font-family = JetBrainsMonoNerdFont
 font-size = 14
