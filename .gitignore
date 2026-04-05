@@ -13,4 +13,4 @@ home/.config/opencode/state/
 home/.config/tmux/plugins/
 
 # opensrc - source code for packages
-opensrc/
+/opensrc/
