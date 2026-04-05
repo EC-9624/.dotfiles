@@ -3,8 +3,8 @@ local silent = { noremap = true, silent = true }
 
 map({ "n", "v" }, "<Space>", "<Nop>", silent)
 
-map("n", "k", "v:count == 0 and 'gk' or 'k'", { expr = true, silent = true })
-map("n", "j", "v:count == 0 and 'gj' or 'j'", { expr = true, silent = true })
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", silent)
 map("n", "<C-s>", "<cmd>write<CR>", silent)
@@ -48,9 +48,6 @@ map("n", "<leader>tp", "<cmd>tabprevious<CR>", silent)
 map("n", "<leader>x", "<cmd>bdelete<CR>", silent)
 map("n", "<leader>b", "<cmd>enew<CR>", silent)
 map("n", "<leader>lw", "<cmd>set wrap!<CR>", silent)
-
-map("i", "jk", "<Esc>", silent)
-map("i", "kj", "<Esc>", silent)
 
 map("v", "p", '"_dP', silent)
 
