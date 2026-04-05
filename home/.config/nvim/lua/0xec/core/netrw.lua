@@ -10,6 +10,10 @@ vim.api.nvim_create_autocmd("FileType", {
   group = group,
   pattern = "netrw",
   callback = function(event)
-    vim.keymap.set("n", "l", "<CR>", { buffer = event.buf, silent = true })
+    vim.keymap.set("n", "l", "<CR>", {
+      buffer = event.buf,
+      silent = true,
+      desc = "Open entry",
+    })
   end,
 })
