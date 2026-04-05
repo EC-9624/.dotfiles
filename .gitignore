@@ -4,7 +4,6 @@ backups/
 # OpenCode generated content
 home/.config/opencode/.git/
 home/.config/opencode/node_modules/
-home/.config/opencode/resources/repos/
 home/.config/opencode/state/
 
 # OpenCode local runtime output
@@ -12,3 +11,6 @@ home/.config/opencode/state/
 
 # Local tmux plugins managed by TPM
 home/.config/tmux/plugins/
+
+# opensrc - source code for packages
+opensrc/

@@ -33,19 +33,21 @@ Do not use this skill for:
 
 ## Available Tools
 
-| Tool              | Purpose |
-| ----------------- | ------- |
-| `resource_search` | Search documentation resources (single resource or all) |
-| `resource_read`   | Read documentation files in full |
-| `resource_tree`   | Inspect docs repo structure |
-| `glob`            | Find local code files by pattern |
-| `grep`            | Search local code content |
-| `read`            | Read local code files |
+| Tool   | Purpose |
+| ------ | ------- |
+| `glob` | Find local code files by pattern |
+| `grep` | Search local code content |
+| `read` | Read local code files |
 
-`resource_search` expects a regex query, not a plain keyword list.
+When investigating third-party source fetched with `opensrc`:
+- Check `opensrc/sources.json` first to see what is available.
+- Search under `opensrc/**` with `glob` and `grep`.
+- Read files directly from `opensrc/**` with `read`.
+- Prefer full globs for docs filters, e.g. `opensrc/**/*.md`, `opensrc/**/*.mdx`, or `opensrc/**/*.{ts,tsx,js,jsx}`.
+
+`grep` expects a regex query, not a plain keyword list.
 - Do: `createStore|getDefaultStore|Provider`
 - Don't: `createStore getDefaultStore Provider`
-- Prefer full globs for docs filters, e.g. `docs/**/*.mdx` or `**/*.{md,mdx,ts,tsx}`
 
 ## Research Modes
 
@@ -83,10 +85,11 @@ If user does not specify, default to `normal`.
    - Determine library/repo and the exact question.
    - If the question has multiple interpretations, choose the safest common interpretation and state it.
 
-2. Discover documentation
-   - If resource name is provided, search that resource first.
-   - If resource name is unknown, search across all resources.
+2. Discover documentation and fetched source
+   - If the question is about a dependency or external repo, check `opensrc/sources.json` to see whether the source is already available.
+   - If the relevant source is present, search under `opensrc/` first.
    - Prioritize docs directories (`docs/`, `content/`, `pages/`, `src/content/`) and key files (`README`, `index`, `introduction`, `getting-started`).
+   - If the relevant external source is missing, say so plainly and suggest fetching it with `opensrc <package-or-repo>`.
 
 3. Read and extract evidence
    - Read the most relevant docs files.
@@ -132,15 +135,15 @@ Use one overall confidence label:
 - `medium`: mostly supported, minor inference
 - `low`: partial evidence, ambiguity remains
 
-## Missing Resource Behavior
+## Missing Source Behavior
 
-If a requested resource does not exist, return:
+If a requested external package or repo is not present under `opensrc/`, return:
 
-"The '<name>' resource is not available. Add it with `/resource add <name> <url>`."
+"The source for '<name>' is not available in `opensrc/`. Fetch it with `opensrc <package-or-repo>` and retry."
 
 Then provide a helpful fallback:
-- suggest searching all existing resources for related terms
-- ask user for the docs URL if they want it added
+- suggest searching the local codebase for related terms
+- explain whether the answer can still be partially derived from docs or local types
 
 ## Output Contract
 
