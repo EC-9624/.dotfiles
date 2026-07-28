@@ -35,8 +35,8 @@ map("n", "<Left>", "<cmd>vertical resize -2<CR>", opts("Decrease window width"))
 map("n", "<Right>", "<cmd>vertical resize +2<CR>", opts("Increase window width"))
 
 -- Buffers
-map("n", "<Tab>", "<cmd>bnext<CR>", opts("Next buffer"))
-map("n", "<S-Tab>", "<cmd>bprevious<CR>", opts("Previous buffer"))
+map("n", "]b", "<cmd>bnext<CR>", opts("Next buffer"))
+map("n", "[b", "<cmd>bprevious<CR>", opts("Previous buffer"))
 map("n", "<leader>sb", "<cmd>buffers<CR>:buffer ", opts("Select buffer", { silent = false }))
 map("n", "<leader>x", function()
 	Snacks.bufdelete()
