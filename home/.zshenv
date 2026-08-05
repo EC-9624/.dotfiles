@@ -11,6 +11,8 @@ path=(
   "$HOME/.opencode/bin"
   "$HOME/.local/bin"
   "$BUN_INSTALL/bin"
+  "$HOME/.local/share/fnm/aliases/default/bin"
+  "/Applications/Obsidian.app/Contents/MacOS"
   "$HOMEBREW_PREFIX/bin"
   "$HOMEBREW_PREFIX/sbin"
   "/usr/local/bin"
