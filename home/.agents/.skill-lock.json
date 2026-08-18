@@ -60,9 +60,9 @@
       "sourceType": "github",
       "sourceUrl": "https://github.com/GoogleChrome/modern-web-guidance.git",
       "skillPath": "skills/modern-web-guidance/SKILL.md",
-      "skillFolderHash": "83059c96ba3ad213acda61a18451555d9b0860fb",
+      "skillFolderHash": "681f653310c862ed9e82421df9b78097bea56135",
       "installedAt": "2026-06-23T05:26:05.377Z",
-      "updatedAt": "2026-08-05T07:10:17.506Z"
+      "updatedAt": "2026-08-18T07:59:57.476Z"
     },
     "gh-stack": {
       "source": "github/gh-stack",
