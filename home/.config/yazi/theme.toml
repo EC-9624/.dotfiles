@@ -1,101 +1,101 @@
 [mgr]
-cwd = { fg = "#9ccfd8", bold = true }
+cwd = { fg = "cyan", bold = true }
 
 # Find
-find_keyword = { fg = "#f6c177", italic = true }
-find_position = { fg = "#eb6f92", bg = "reset", italic = true }
+find_keyword = { fg = "yellow", italic = true }
+find_position = { fg = "red", bg = "reset", italic = true }
 
 # Marker
-marker_selected = { fg = "#9ccfd8", bg = "#9ccfd8" }
-marker_copied = { fg = "#f6c177", bg = "#f6c177" }
-marker_cut = { fg = "#B4637A", bg = "#B4637A" }
+marker_selected = { fg = "cyan", bg = "cyan" }
+marker_copied = { fg = "green", bg = "green" }
+marker_cut = { fg = "red", bg = "red" }
 
 # Border
 border_symbol = "│"
-border_style = { fg = "#524f67" }
+border_style = { fg = "darkgray" }
 
 # Highlighting
-syntect_theme = "~/.config/yazi/rose-pine.tmTheme"
+syntect_theme = "~/.config/current-theme/yazi.tmTheme"
 
 
 [tabs]
-active = { fg = "#e0def4", bg = "#191724" }
-inactive = { fg = "#e0def4", bg = "#2A273F" }
+active = { fg = "white", bg = "black" }
+inactive = { fg = "white", bg = "darkgray" }
 
 
 # Indicator of hovered file
 [indicator]
-parent  = { fg = "#908caa", bg = "#26233A" }
-current = { fg = "#191724", bg = "#9ccfd8", bold = true }
-preview = { fg = "#f6c177", underline = true }
+parent  = { fg = "gray", bg = "darkgray" }
+current = { fg = "black", bg = "cyan", bold = true }
+preview = { fg = "yellow", underline = true }
 padding = { open = "▐", close = "▌" }
 
 
 [mode]
-normal_main = { fg = "#191724", bg = "#9ccfd8", bold = true }
-normal_alt  = { fg = "#9ccfd8", bg = "#1f1d2e" }
+normal_main = { fg = "black", bg = "cyan", bold = true }
+normal_alt  = { fg = "cyan", bg = "darkgray" }
 
 # Select mode
-select_main = { fg = "#191724", bg = "#ebbcba", bold = true }
-select_alt  = { fg = "#ebbcba", bg = "#1f1d2e" }
+select_main = { fg = "black", bg = "magenta", bold = true }
+select_alt  = { fg = "magenta", bg = "darkgray" }
 
 # Unset mode
-unset_main = { fg = "#191724", bg = "#eb6f92", bold = true }
-unset_alt  = { fg = "#eb6f92", bg = "#1f1d2e" }
+unset_main = { fg = "black", bg = "red", bold = true }
+unset_alt  = { fg = "red", bg = "darkgray" }
 
 
 [status]
-overall   = { bg = "#191724" }
+overall   = { bg = "reset" }
 sep_left  = { open = "", close = "" }
 sep_right = { open = "", close = "" }
 
 # Permissions
-perm_sep   = { fg = "#6e6a86" }
-perm_type  = { fg = "#9ccfd8" }
-perm_read  = { fg = "#f6c177" }
-perm_write = { fg = "#eb6f92" }
-perm_exec  = { fg = "#31748f" }
+perm_sep   = { fg = "darkgray" }
+perm_type  = { fg = "cyan" }
+perm_read  = { fg = "yellow" }
+perm_write = { fg = "red" }
+perm_exec  = { fg = "blue" }
 
 # Progress
-progress_label = { fg = "#e0def4", bold = true }
-progress_normal = { fg = "#e0def4", bg = "#1f1d2e" }
-progress_error = { fg = "#eb6f92", bg = "#1f1d2e" }
+progress_label = { fg = "white", bold = true }
+progress_normal = { fg = "white", bg = "darkgray" }
+progress_error = { fg = "red", bg = "darkgray" }
 
 
 [input]
-border = { fg = "#524f67" }
+border = { fg = "blue" }
 title = {}
 value = {}
 selected = { reversed = true }
 
 
 [pick]
-border = { fg = "#524f67" }
-active = { fg = "#eb6f92" }
+border = { fg = "blue" }
+active = { fg = "red" }
 inactive = {}
 
 
 [tasks]
-border = { fg = "#524f67" }
+border = { fg = "blue" }
 title = {}
 hovered = { underline = true }
 
 
 [which]
-mask = { bg = "#313244" }
-cand = { fg = "#9ccfd8" }
-rest = { fg = "#9399b2" }
-desc = { fg = "#eb6f92" }
+mask = { bg = "black" }
+cand = { fg = "cyan" }
+rest = { fg = "gray" }
+desc = { fg = "red" }
 separator = "  "
-separator_style = { fg = "#585b70" }
+separator_style = { fg = "darkgray" }
 
 
 [help]
-on = { fg = "#eb6f92" }
-run = { fg = "#9ccfd8" }
-desc = { fg = "#9399b2" }
-hovered = { bg = "#585b70", bold = true }
-footer = { fg = "#2A273F", bg = "#e0def4" }
+on = { fg = "red" }
+run = { fg = "cyan" }
+desc = { fg = "gray" }
+hovered = { bg = "darkgray", bold = true }
+footer = { fg = "black", bg = "white" }
 
 
 # File-specific styles
@@ -103,22 +103,22 @@ footer = { fg = "#2A273F", bg = "#e0def4" }
 
 rules = [
     # Images
-    { mime = "image/*", fg = "#9ccfd8" },
+    { mime = "image/*", fg = "cyan" },
 
     # Videos
-    { mime = "video/*", fg = "#f6c177" },
-    { mime = "audio/*", fg = "#f6c177" },
+    { mime = "video/*", fg = "yellow" },
+    { mime = "audio/*", fg = "yellow" },
 
     # Archives
-    { mime = "application/zip", fg = "#eb6f92" },
-    { mime = "application/gzip", fg = "#eb6f92" },
-    { mime = "application/x-tar", fg = "#eb6f92" },
-    { mime = "application/x-bzip", fg = "#eb6f92" },
-    { mime = "application/x-bzip2", fg = "#eb6f92" },
-    { mime = "application/x-7z-compressed", fg = "#eb6f92" },
-    { mime = "application/x-rar", fg = "#eb6f92" },
+    { mime = "application/zip", fg = "red" },
+    { mime = "application/gzip", fg = "red" },
+    { mime = "application/x-tar", fg = "red" },
+    { mime = "application/x-bzip", fg = "red" },
+    { mime = "application/x-bzip2", fg = "red" },
+    { mime = "application/x-7z-compressed", fg = "red" },
+    { mime = "application/x-rar", fg = "red" },
 
     # Fallback
-    { url = "*", fg = "#e0def4" },
-    { url = "*/", fg = "#9ccfd8", bold = true },
+    { url = "*", fg = "white" },
+    { url = "*/", fg = "cyan", bold = true },
 ]

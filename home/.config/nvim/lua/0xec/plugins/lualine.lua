@@ -4,7 +4,7 @@ return {
 	config = function()
 		local lualine = require("lualine")
 		local lazy_status = require("lazy.status")
-		local colors = require("rose-pine.palette")
+		local colors = require("0xec.theme").colors
 
 		local my_lualine_theme = {
 			normal = {

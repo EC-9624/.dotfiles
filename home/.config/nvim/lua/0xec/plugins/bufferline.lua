@@ -3,7 +3,7 @@ return {
 	version = "*",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = function()
-		local colors = require("rose-pine.palette")
+		local colors = require("0xec.theme").colors
 		local diagnostic_icons = {
 			error = "",
 			warning = "",

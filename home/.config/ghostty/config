@@ -1,4 +1,4 @@
-theme = Rose Pine
+config-file = ?../current-theme/ghostty.conf
 macos-option-as-alt = true
 macos-titlebar-proxy-icon = hidden
 title = Ghostty
@@ -19,7 +19,6 @@ window-save-state = always
 window-theme = dark
 confirm-close-surface = false
 unfocused-split-opacity = 0.75
-split-divider-color = #524f67
 
 # --- Quick Terminal ---
 quick-terminal-position = top

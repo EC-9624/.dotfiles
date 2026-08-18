@@ -19,6 +19,17 @@ cd ~/Code/dotfiles
 
 `./dot init` installs the Homebrew bundle, installs Bun, clones `~/.oh-my-zsh` when missing, and stows `home/` into `$HOME`.
 
+## Themes
+
+Tokyo Night and Rose Pine are available through a shared terminal-native theme setup. Ghostty, Neovim, and Yazi syntax load theme-specific files through `~/.config/current-theme`; tmux, Starship, lazygit, btop, tmux-palette, and the Yazi interface use the terminal ANSI palette.
+
+```bash
+./dot theme tokyo-night
+./dot theme rose-pine
+```
+
+After switching, reload Ghostty with `Cmd+Shift+,` and restart open Neovim or Yazi sessions.
+
 ## Neovim
 
 The Neovim configuration requires Neovim 0.11 or newer. Configured formatters include Prettier, Prettierd, Stylua, and Zigfmt.
@@ -34,5 +45,6 @@ Oxfmt and `tsgo` are optional project-local tools. When present, Oxfmt takes pri
 ```bash
 ./dot init
 ./dot stow
+./dot theme tokyo-night
 ./dot doctor
 ```

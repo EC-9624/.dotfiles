@@ -67,6 +67,44 @@ restow() {
   stow -R -d "${DOTFILES_DIR}" -t "${HOME}" home
 }
 
+set_theme() {
+  local name="${1:-}"
+  local themes_dir="${HOME}/.config/themes"
+  local theme_dir="${themes_dir}/${name}"
+  local current_theme="${HOME}/.config/current-theme"
+
+  if [[ ! "$name" =~ ^[a-z0-9][a-z0-9-]*$ ]]; then
+    fail "invalid theme name: ${name:-<empty>}"
+  fi
+
+  if [[ ! -d "$theme_dir" ]]; then
+    fail "theme does not exist: $theme_dir"
+  fi
+
+  ln -nsf "$theme_dir" "$current_theme"
+
+  if [[ -d "${HOME}/.config/tmux-palette" ]]; then
+    printf '%s\n' '{' '  "name": "terminal"' '}' > "${HOME}/.config/tmux-palette/theme.json"
+  fi
+
+  if command -v tmux >/dev/null 2>&1 && tmux list-sessions >/dev/null 2>&1; then
+    tmux source-file "${HOME}/.config/tmux/tmux.conf"
+  fi
+
+  if pgrep -x btop >/dev/null 2>&1; then
+    pkill -SIGUSR2 btop
+  fi
+
+  say "theme: $name"
+  say "reload Ghostty with Cmd+Shift+,; restart open Neovim and Yazi sessions"
+}
+
+ensure_theme() {
+  if [[ ! -e "${HOME}/.config/current-theme" ]]; then
+    set_theme tokyo-night
+  fi
+}
+
 doctor() {
   local missing=0
   local commands=(bat brew bun curl delta eza fd fnm fzf git lazygit nvim prettier prettierd rg starship stow stylua tmux unzip yazi zig zoxide zsh)
@@ -74,6 +112,9 @@ doctor() {
     "${HOME}/.bun/_bun"
     "${HOME}/.oh-my-zsh/oh-my-zsh.sh"
     "${HOME}/.config/lazygit/config.yml"
+    "${HOME}/.config/current-theme"
+    "${HOME}/.config/themes/rose-pine"
+    "${HOME}/.config/themes/tokyo-night"
     "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
     "/opt/homebrew/opt/fzf-tab/share/fzf-tab/fzf-tab.zsh"
     "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
@@ -116,6 +157,7 @@ Usage: ./dot <command>
 Commands:
   init    install bundle, bun, oh-my-zsh, and stow files
   stow    restow managed files into $HOME
+  theme   switch terminal theme: ./dot theme <name>
   doctor  check core commands and stow health
 EOF
 }
@@ -129,9 +171,14 @@ main() {
       install_bun
       install_oh_my_zsh
       restow
+      ensure_theme
       ;;
     stow)
       restow
+      ensure_theme
+      ;;
+    theme)
+      set_theme "${2:-}"
       ;;
     doctor)
       doctor
