@@ -17,7 +17,20 @@ cd ~/Code/dotfiles
 ./dot init
 ```
 
-`./dot init` installs the Homebrew bundle, installs Bun, clones `~/.oh-my-zsh` when missing, and stows `home/` into `$HOME`.
+`./dot init` installs the Homebrew bundle, Bun, the OpenCode 2 beta, clones `~/.oh-my-zsh` when missing, and stows `home/` into `$HOME`.
+
+## OpenCode 2
+
+OpenCode 2 runs as an isolated `launchd` service on `0.0.0.0:4097`; OpenCode 1 remains on port `4096`. The `opencode2` shell function uses v2's isolated configuration, data, cache, and service discovery.
+
+```bash
+launchctl kickstart -k "gui/$(id -u)/ai.opencode2.serve"
+opencode2 service status
+opencode2 api get /api/health
+opencode2 pair
+```
+
+Only expose port `4097` on trusted networks. Remote clients must use the pairing information from `opencode2 pair`.
 
 ## Themes
 

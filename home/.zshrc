@@ -89,6 +89,7 @@ alias ll="eza --icons=always -l --group-directories-first"
 alias la="eza --icons=always -la --group-directories-first"
 alias lzg="lazygit"
 alias brewup="brew update && brew upgrade"
+alias oc="opencode2"
 
 # functions
 function y() {
@@ -112,6 +113,18 @@ opencode() {
   else
     command opencode "$@"
   fi
+}
+
+opencode2() {
+  command env \
+    -u OPENCODE_DISABLE_DEFAULT_PLUGINS \
+    -u OPENCODE_SERVER_PASSWORD \
+    -u OPENCODE_SERVER_URL \
+    XDG_CONFIG_HOME="$HOME/.config/opencode-v2" \
+    XDG_DATA_HOME="$HOME/.local/share/opencode-v2" \
+    XDG_CACHE_HOME="$HOME/.cache/opencode-v2" \
+    XDG_STATE_HOME="$HOME/.local/state/opencode-v2" \
+    opencode2 "$@"
 }
 
 # machine-specific overrides and secrets

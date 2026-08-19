@@ -1,0 +1,67 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "references": {
+    "vault": {
+      "path": "~/Code/agent-vault/",
+      "description": "obsidian vault that act as durable memory for the user and AI agents"
+    }
+  },
+  "permissions": [
+    {
+      "action": "external_directory",
+      "resource": "~/Code/agent-vault/*",
+      "effect": "allow"
+    },
+    {
+      "action": "edit",
+      "resource": "~/Code/agent-vault/*",
+      "effect": "allow"
+    }
+  ],
+  "providers": {
+    "openai": {
+      "models": {
+        "gpt-5.6-sol": {
+          "settings": {
+            "reasoningSummary": "auto",
+            "include": ["reasoning.encrypted_content"]
+          }
+        }
+      }
+    },
+    "anthropic": {
+      "models": {
+        "claude-opus-4-8": {
+          "settings": {
+            "thinking": {
+              "type": "adaptive",
+              "display": "summarized"
+            },
+            "effort": "max"
+          }
+        },
+        "claude-opus-4-7": {
+          "settings": {
+            "thinking": {
+              "type": "adaptive",
+              "display": "summarized"
+            },
+            "effort": "max"
+          }
+        },
+        "claude-opus-4-5": {
+          "headers": {
+            "anthropic-beta": "context-1m-2025-08-07"
+          },
+          "limit": {
+            "context": 1000000,
+            "output": 64000
+          },
+          "settings": {
+            "effort": "high"
+          }
+        }
+      }
+    }
+  }
+}

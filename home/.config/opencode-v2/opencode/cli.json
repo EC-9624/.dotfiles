@@ -1,0 +1,39 @@
+{
+  "theme": {
+    "name": "current",
+    "mode": "system"
+  },
+  "tabs": {
+    "layout": "horizontal",
+    "scope": "cwd",
+    "enabled": false
+  },
+  "terminal": {
+    "title": true,
+    "copy": "select"
+  },
+  "session": {
+    "sidebar": "hide",
+    "scrollbar": false,
+    "markdown": "rendered",
+    "grouping": "auto",
+    "image_preview": false,
+    "new_location": "launch"
+  },
+  "animations": true,
+  "diffs": {
+    "single": false,
+    "view": "auto",
+    "tree": true
+  },
+  "prompt": {
+    "paste": "compact",
+    "image_preview": false
+  },
+  "debug": {
+    "devtools": false
+  },
+  "scroll": {
+    "speed": 3
+  }
+}

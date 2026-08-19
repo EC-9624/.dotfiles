@@ -62,6 +62,25 @@ install_bun() {
   "${bun_bin}" completions > "${bun_completion}"
 }
 
+install_opencode2() {
+  local bun_bin="${HOME}/.bun/bin/bun"
+  local opencode_bin="${HOME}/.bun/bin/opencode2"
+
+  if [[ -x "${opencode_bin}" ]] && "${opencode_bin}" --version >/dev/null 2>&1; then
+    say "ok: opencode2"
+    return 0
+  fi
+
+  say "installing: opencode2"
+  "${bun_bin}" install -g --trust @opencode-ai/cli@beta
+
+  if ! "${opencode_bin}" --version >/dev/null 2>&1; then
+    (cd "${HOME}/.bun/install/global" && "${bun_bin}" pm trust @opencode-ai/cli)
+  fi
+
+  "${opencode_bin}" --version >/dev/null 2>&1 || fail "opencode2 installation failed"
+}
+
 restow() {
   need_cmd stow
   stow -R -d "${DOTFILES_DIR}" -t "${HOME}" home
@@ -72,6 +91,9 @@ set_theme() {
   local themes_dir="${HOME}/.config/themes"
   local theme_dir="${themes_dir}/${name}"
   local current_theme="${HOME}/.config/current-theme"
+  local opencode2_dir="${HOME}/.config/opencode-v2/opencode"
+  local opencode2_cli="${opencode2_dir}/cli.json"
+  local opencode2_cli_tmp
 
   if [[ ! "$name" =~ ^[a-z0-9][a-z0-9-]*$ ]]; then
     fail "invalid theme name: ${name:-<empty>}"
@@ -90,6 +112,19 @@ set_theme() {
   if [[ -f "${current_theme}/opencode.json" ]]; then
     mkdir -p "${HOME}/.config/opencode/themes"
     cp "${current_theme}/opencode.json" "${HOME}/.config/opencode/themes/current.json"
+
+    need_cmd jq
+    mkdir -p "${opencode2_dir}/themes"
+    cp "${current_theme}/opencode.json" "${opencode2_dir}/themes/current.json"
+
+    opencode2_cli_tmp="$(mktemp "${opencode2_cli}.XXXXXX")"
+    if [[ -f "${opencode2_cli}" ]]; then
+      jq '.theme.name = "current" | .theme.mode //= "system"' "${opencode2_cli}" > "${opencode2_cli_tmp}"
+    else
+      printf '%s\n' '{}' | jq '.theme.name = "current" | .theme.mode = "system"' > "${opencode2_cli_tmp}"
+    fi
+    chmod 600 "${opencode2_cli_tmp}"
+    mv "${opencode2_cli_tmp}" "${opencode2_cli}"
   fi
 
   if command -v tmux >/dev/null 2>&1 && tmux list-sessions >/dev/null 2>&1; then
@@ -112,12 +147,13 @@ ensure_theme() {
 
 doctor() {
   local missing=0
-  local commands=(bat brew bun curl delta eza fd fnm fzf git lazygit nvim prettier prettierd rg starship stow stylua tmux unzip yazi zig zoxide zsh)
+  local commands=(bat brew bun curl delta eza fd fnm fzf git jq lazygit nvim opencode2 prettier prettierd rg starship stow stylua tmux unzip yazi zig zoxide zsh)
   local paths=(
     "${HOME}/.bun/_bun"
     "${HOME}/.oh-my-zsh/oh-my-zsh.sh"
     "${HOME}/.config/lazygit/config.yml"
     "${HOME}/.config/current-theme"
+    "${HOME}/Library/LaunchAgents/ai.opencode2.serve.plist"
     "${HOME}/.config/themes/catppuccin"
     "${HOME}/.config/themes/rose-pine"
     "${HOME}/.config/themes/tokyo-night"
@@ -175,6 +211,7 @@ main() {
     init)
       install_packages
       install_bun
+      install_opencode2
       install_oh_my_zsh
       restow
       ensure_theme
