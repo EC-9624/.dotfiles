@@ -5,6 +5,7 @@ backups/
 home/.config/opencode/.git/
 home/.config/opencode/node_modules/
 home/.config/opencode/state/
+home/.config/opencode/themes/
 
 # OpenCode local runtime output
 .opencode/plans/

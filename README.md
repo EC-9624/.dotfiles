@@ -21,14 +21,15 @@ cd ~/Code/dotfiles
 
 ## Themes
 
-Tokyo Night and Rose Pine are available through a shared terminal-native theme setup. Ghostty, Neovim, and Yazi syntax load theme-specific files through `~/.config/current-theme`; tmux, Starship, lazygit, btop, tmux-palette, and the Yazi interface use the terminal ANSI palette.
+Tokyo Night, Rose Pine, and Catppuccin Macchiato are available through a shared terminal-native theme setup. Ghostty, Neovim, Yazi syntax, and OpenCode load theme-specific files through `~/.config/current-theme`; tmux, Starship, lazygit, btop, tmux-palette, and the Yazi interface use the terminal ANSI palette.
 
 ```bash
 ./dot theme tokyo-night
 ./dot theme rose-pine
+./dot theme catppuccin
 ```
 
-After switching, reload Ghostty with `Cmd+Shift+,` and restart open Neovim or Yazi sessions.
+After switching, reload Ghostty with `Cmd+Shift+,` and restart open Neovim, Yazi, and OpenCode sessions.
 
 ## Neovim
 

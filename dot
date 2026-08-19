@@ -87,6 +87,11 @@ set_theme() {
     printf '%s\n' '{' '  "name": "terminal"' '}' > "${HOME}/.config/tmux-palette/theme.json"
   fi
 
+  if [[ -f "${current_theme}/opencode.json" ]]; then
+    mkdir -p "${HOME}/.config/opencode/themes"
+    cp "${current_theme}/opencode.json" "${HOME}/.config/opencode/themes/current.json"
+  fi
+
   if command -v tmux >/dev/null 2>&1 && tmux list-sessions >/dev/null 2>&1; then
     tmux source-file "${HOME}/.config/tmux/tmux.conf"
   fi
@@ -96,7 +101,7 @@ set_theme() {
   fi
 
   say "theme: $name"
-  say "reload Ghostty with Cmd+Shift+,; restart open Neovim and Yazi sessions"
+  say "reload Ghostty with Cmd+Shift+,; restart open Neovim, Yazi, and opencode sessions"
 }
 
 ensure_theme() {
@@ -113,6 +118,7 @@ doctor() {
     "${HOME}/.oh-my-zsh/oh-my-zsh.sh"
     "${HOME}/.config/lazygit/config.yml"
     "${HOME}/.config/current-theme"
+    "${HOME}/.config/themes/catppuccin"
     "${HOME}/.config/themes/rose-pine"
     "${HOME}/.config/themes/tokyo-night"
     "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
