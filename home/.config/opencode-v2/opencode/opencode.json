@@ -22,6 +22,18 @@
     "openai": {
       "models": {
         "gpt-5.6-sol": {
+          "limit": {
+            "context": 272000
+          },
+          "settings": {
+            "reasoningSummary": "auto",
+            "include": ["reasoning.encrypted_content"]
+          }
+        },
+        "gpt-5.6-luna": {
+          "limit": {
+            "context": 1000000
+          },
           "settings": {
             "reasoningSummary": "auto",
             "include": ["reasoning.encrypted_content"]

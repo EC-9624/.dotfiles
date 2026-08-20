@@ -3,6 +3,9 @@
     "name": "current",
     "mode": "system"
   },
+  "keybinds": {
+    "agent.cycle": "tab"
+  },
   "tabs": {
     "layout": "horizontal",
     "scope": "cwd",
@@ -16,8 +19,8 @@
     "sidebar": "hide",
     "scrollbar": false,
     "markdown": "rendered",
-    "grouping": "auto",
-    "image_preview": false,
+    "grouping": "none",
+    "image_preview": true,
     "new_location": "launch"
   },
   "animations": true,
@@ -28,7 +31,7 @@
   },
   "prompt": {
     "paste": "compact",
-    "image_preview": false
+    "image_preview": true
   },
   "debug": {
     "devtools": false
