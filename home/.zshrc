@@ -124,6 +124,7 @@ opencode2() {
     XDG_DATA_HOME="$HOME/.local/share/opencode-v2" \
     XDG_CACHE_HOME="$HOME/.cache/opencode-v2" \
     XDG_STATE_HOME="$HOME/.local/state/opencode-v2" \
+    GH_CONFIG_DIR="$HOME/.config/gh" \
     opencode2 "$@"
 }
 
