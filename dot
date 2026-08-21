@@ -63,20 +63,17 @@ install_bun() {
 }
 
 install_opencode2() {
-  local bun_bin="${HOME}/.bun/bin/bun"
-  local opencode_bin="${HOME}/.bun/bin/opencode2"
+  local opencode_bin="${HOME}/.opencode/bin/opencode2"
 
   if [[ -x "${opencode_bin}" ]] && "${opencode_bin}" --version >/dev/null 2>&1; then
     say "ok: opencode2"
     return 0
   fi
 
+  need_cmd bash
+  need_cmd curl
   say "installing: opencode2"
-  "${bun_bin}" install -g --trust @opencode-ai/cli@beta
-
-  if ! "${opencode_bin}" --version >/dev/null 2>&1; then
-    (cd "${HOME}/.bun/install/global" && "${bun_bin}" pm trust @opencode-ai/cli)
-  fi
+  curl -fsSL https://opencode.ai/v2/install | bash -s -- --no-modify-path
 
   "${opencode_bin}" --version >/dev/null 2>&1 || fail "opencode2 installation failed"
 }
@@ -153,7 +150,6 @@ doctor() {
     "${HOME}/.oh-my-zsh/oh-my-zsh.sh"
     "${HOME}/.config/lazygit/config.yml"
     "${HOME}/.config/current-theme"
-    "${HOME}/Library/LaunchAgents/ai.opencode2.serve.plist"
     "${HOME}/.config/themes/catppuccin"
     "${HOME}/.config/themes/rose-pine"
     "${HOME}/.config/themes/tokyo-night"
