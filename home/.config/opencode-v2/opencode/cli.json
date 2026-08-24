@@ -21,7 +21,8 @@
     "markdown": "rendered",
     "grouping": "none",
     "image_preview": true,
-    "new_location": "launch"
+    "new_location": "launch",
+    "thinking": "show"
   },
   "animations": true,
   "diffs": {
