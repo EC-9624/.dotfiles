@@ -16,6 +16,16 @@
       "action": "edit",
       "resource": "~/Code/agent-vault/*",
       "effect": "allow"
+    },
+    {
+      "action": "atlassian_*",
+      "resource": "*",
+      "effect": "deny"
+    },
+    {
+      "action": "notion_*",
+      "resource": "*",
+      "effect": "deny"
     }
   ],
   "providers": {
@@ -74,6 +84,74 @@
           }
         }
       }
+    }
+  },
+  "mcp": {
+    "servers": {
+      "figma-desktop": {
+        "type": "remote",
+        "url": "http://127.0.0.1:3845/mcp"
+      },
+      "notion": {
+        "type": "remote",
+        "url": "https://mcp.notion.com/mcp"
+      },
+      "atlassian": {
+        "type": "remote",
+        "url": "https://mcp.atlassian.com/v1/mcp/authv2"
+      },
+      "metabase": {
+        "type": "remote",
+        "url": "https://metabase.prtimes-tools.jp/api/metabase-mcp"
+      },
+      "excalidraw": {
+        "type": "remote",
+        "url": "https://mcp.excalidraw.com"
+      }
+    }
+  },
+  "agents": {
+    "jira": {
+      "description": "Atlassian Jira specialist. Use for reading, searching, creating, updating, transitioning, and commenting on Jira issues. Invoke when the user references a Jira key, asks about tickets, sprints, JQL, or wants to file/update issues.",
+      "mode": "subagent",
+      "permissions": [
+        {
+          "action": "atlassian_*",
+          "resource": "*",
+          "effect": "allow"
+        },
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*",
+          "effect": "deny"
+        }
+      ]
+    },
+    "notion": {
+      "description": "Notion specialist. Use for reading, searching, creating, and updating Notion pages, databases, and workspace content. Invoke when the user references Notion, pages, databases, docs, or workspace knowledge.",
+      "mode": "subagent",
+      "permissions": [
+        {
+          "action": "notion_*",
+          "resource": "*",
+          "effect": "allow"
+        },
+        {
+          "action": "edit",
+          "resource": "*",
+          "effect": "deny"
+        },
+        {
+          "action": "shell",
+          "resource": "*",
+          "effect": "deny"
+        }
+      ]
     }
   }
 }
