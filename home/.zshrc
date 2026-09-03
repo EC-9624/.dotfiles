@@ -8,8 +8,8 @@ fpath=(/opt/homebrew/share/zsh-completions $fpath)
 source "$ZSH/oh-my-zsh.sh"
 
 # environment
-export OPENCODE_DISABLE_DEFAULT_PLUGINS=true
-export OPENCODE_SERVER_URL="http://127.0.0.1:4096"
+unset OPENCODE_DISABLE_DEFAULT_PLUGINS OPENCODE_SERVER_URL
+unfunction opencode opencode2 2>/dev/null
 
 # vim editing
 set -o vi
@@ -89,7 +89,7 @@ alias ll="eza --icons=always -l --group-directories-first"
 alias la="eza --icons=always -la --group-directories-first"
 alias lzg="lazygit"
 alias brewup="brew update && brew upgrade"
-alias oc="opencode2"
+alias oc="opencode"
 
 # functions
 function y() {
@@ -101,31 +101,6 @@ function y() {
     builtin cd -- "$cwd"
   fi
   rm -f -- "$tmp"
-}
-
-opencode() {
-  if [[ "$#" -eq 0 ]]; then
-    if [[ -n "${OPENCODE_SERVER_PASSWORD:-}" ]]; then
-      command opencode attach "$OPENCODE_SERVER_URL" -p "$OPENCODE_SERVER_PASSWORD" --dir "$PWD"
-    else
-      command opencode attach "$OPENCODE_SERVER_URL" --dir "$PWD"
-    fi
-  else
-    command opencode "$@"
-  fi
-}
-
-opencode2() {
-  command env \
-    -u OPENCODE_DISABLE_DEFAULT_PLUGINS \
-    -u OPENCODE_SERVER_PASSWORD \
-    -u OPENCODE_SERVER_URL \
-    XDG_CONFIG_HOME="$HOME/.config/opencode-v2" \
-    XDG_DATA_HOME="$HOME/.local/share/opencode-v2" \
-    XDG_CACHE_HOME="$HOME/.cache/opencode-v2" \
-    XDG_STATE_HOME="$HOME/.local/state/opencode-v2" \
-    GH_CONFIG_DIR="$HOME/.config/gh" \
-    opencode2 "$@"
 }
 
 # machine-specific overrides and secrets

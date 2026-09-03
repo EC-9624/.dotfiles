@@ -17,19 +17,19 @@ cd ~/Code/dotfiles
 ./dot init
 ```
 
-`./dot init` installs the Homebrew bundle, Bun, the OpenCode 2 beta, clones `~/.oh-my-zsh` when missing, and stows `home/` into `$HOME`.
+`./dot init` installs the Homebrew bundle, Bun, OpenCode 2, clones `~/.oh-my-zsh` when missing, and stows `home/` into `$HOME`.
 
-## OpenCode 2
+## OpenCode
 
-OpenCode 2 uses its built-in managed background service. The `opencode2` shell function keeps v2's configuration, data, cache, and service discovery isolated from OpenCode 1.
+OpenCode 2 is the primary install and runs as `opencode` from `~/.opencode/bin`. It uses its built-in managed background service:
 
 ```bash
-opencode2 service status
-opencode2 api get /api/health
-opencode2 pair
+opencode service status
+opencode api get /api/health
+opencode pair
 ```
 
-The service listens on localhost by default. Run `opencode2 service set hostname 0.0.0.0` only when remote access is needed and only on trusted networks; remote clients must use the pairing information from `opencode2 pair`.
+The service listens on localhost by default. For remote access on a trusted network, run `opencode service set hostname 0.0.0.0`, then use `opencode pair` to authenticate remote clients.
 
 ## Themes
 

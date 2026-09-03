@@ -62,20 +62,24 @@ install_bun() {
   "${bun_bin}" completions > "${bun_completion}"
 }
 
-install_opencode2() {
-  local opencode_bin="${HOME}/.opencode/bin/opencode2"
+install_opencode() {
+  local opencode_bin="${HOME}/.opencode/bin/opencode"
 
   if [[ -x "${opencode_bin}" ]] && "${opencode_bin}" --version >/dev/null 2>&1; then
-    say "ok: opencode2"
+    say "ok: opencode"
     return 0
   fi
 
   need_cmd bash
   need_cmd curl
-  say "installing: opencode2"
+  say "installing: opencode"
   curl -fsSL https://opencode.ai/v2/install | bash -s -- --no-modify-path
 
-  "${opencode_bin}" --version >/dev/null 2>&1 || fail "opencode2 installation failed"
+  if [[ -x "${HOME}/.opencode/bin/opencode2" ]]; then
+    mv "${HOME}/.opencode/bin/opencode2" "${opencode_bin}"
+  fi
+
+  "${opencode_bin}" --version >/dev/null 2>&1 || fail "opencode installation failed"
 }
 
 restow() {
@@ -88,9 +92,8 @@ set_theme() {
   local themes_dir="${HOME}/.config/themes"
   local theme_dir="${themes_dir}/${name}"
   local current_theme="${HOME}/.config/current-theme"
-  local opencode2_dir="${HOME}/.config/opencode-v2/opencode"
-  local opencode2_cli="${opencode2_dir}/cli.json"
-  local opencode2_cli_tmp
+  local opencode_cli="${HOME}/.config/opencode/cli.json"
+  local opencode_cli_tmp
 
   if [[ ! "$name" =~ ^[a-z0-9][a-z0-9-]*$ ]]; then
     fail "invalid theme name: ${name:-<empty>}"
@@ -111,17 +114,14 @@ set_theme() {
     cp "${current_theme}/opencode.json" "${HOME}/.config/opencode/themes/current.json"
 
     need_cmd jq
-    mkdir -p "${opencode2_dir}/themes"
-    cp "${current_theme}/opencode.json" "${opencode2_dir}/themes/current.json"
-
-    opencode2_cli_tmp="$(mktemp "${opencode2_cli}.XXXXXX")"
-    if [[ -f "${opencode2_cli}" ]]; then
-      jq '.theme.name = "current" | .theme.mode //= "system"' "${opencode2_cli}" > "${opencode2_cli_tmp}"
+    opencode_cli_tmp="$(mktemp "${opencode_cli}.XXXXXX")"
+    if [[ -f "${opencode_cli}" ]]; then
+      jq '.theme.name = "current" | .theme.mode //= "system"' "${opencode_cli}" > "${opencode_cli_tmp}"
     else
-      printf '%s\n' '{}' | jq '.theme.name = "current" | .theme.mode = "system"' > "${opencode2_cli_tmp}"
+      printf '%s\n' '{}' | jq '.theme.name = "current" | .theme.mode = "system"' > "${opencode_cli_tmp}"
     fi
-    chmod 600 "${opencode2_cli_tmp}"
-    mv "${opencode2_cli_tmp}" "${opencode2_cli}"
+    chmod 600 "${opencode_cli_tmp}"
+    mv "${opencode_cli_tmp}" "${opencode_cli}"
   fi
 
   if command -v tmux >/dev/null 2>&1 && tmux list-sessions >/dev/null 2>&1; then
@@ -144,7 +144,7 @@ ensure_theme() {
 
 doctor() {
   local missing=0
-  local commands=(bat brew bun curl delta eza fd fnm fzf git jq lazygit nvim opencode2 prettier prettierd rg starship stow stylua tmux unzip yazi zig zoxide zsh)
+  local commands=(bat brew bun curl delta eza fd fnm fzf git jq lazygit nvim opencode prettier prettierd rg starship stow stylua tmux unzip yazi zig zoxide zsh)
   local paths=(
     "${HOME}/.bun/_bun"
     "${HOME}/.oh-my-zsh/oh-my-zsh.sh"
@@ -207,7 +207,7 @@ main() {
     init)
       install_packages
       install_bun
-      install_opencode2
+      install_opencode
       install_oh_my_zsh
       restow
       ensure_theme
