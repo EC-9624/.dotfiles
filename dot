@@ -62,24 +62,20 @@ install_bun() {
   "${bun_bin}" completions > "${bun_completion}"
 }
 
-install_opencode() {
-  local opencode_bin="${HOME}/.opencode/bin/opencode"
+install_opencode2() {
+  local opencode_bin="${HOME}/.opencode/bin/opencode2"
 
   if [[ -x "${opencode_bin}" ]] && "${opencode_bin}" --version >/dev/null 2>&1; then
-    say "ok: opencode"
+    say "ok: opencode2"
     return 0
   fi
 
   need_cmd bash
   need_cmd curl
-  say "installing: opencode"
+  say "installing: opencode2"
   curl -fsSL https://opencode.ai/v2/install | bash -s -- --no-modify-path
 
-  if [[ -x "${HOME}/.opencode/bin/opencode2" ]]; then
-    mv "${HOME}/.opencode/bin/opencode2" "${opencode_bin}"
-  fi
-
-  "${opencode_bin}" --version >/dev/null 2>&1 || fail "opencode installation failed"
+  "${opencode_bin}" --version >/dev/null 2>&1 || fail "opencode2 installation failed"
 }
 
 restow() {
@@ -133,7 +129,7 @@ set_theme() {
   fi
 
   say "theme: $name"
-  say "reload Ghostty with Cmd+Shift+,; restart open Neovim, Yazi, and opencode sessions"
+  say "reload Ghostty with Cmd+Shift+,; restart open Neovim, Yazi, and opencode2 sessions"
 }
 
 ensure_theme() {
@@ -144,7 +140,7 @@ ensure_theme() {
 
 doctor() {
   local missing=0
-  local commands=(bat brew bun curl delta eza fd fnm fzf git jq lazygit nvim opencode prettier prettierd rg starship stow stylua tmux unzip yazi zig zoxide zsh)
+  local commands=(bat brew bun curl delta eza fd fnm fzf git jq lazygit nvim opencode2 prettier prettierd rg starship stow stylua tmux unzip yazi zig zoxide zsh)
   local paths=(
     "${HOME}/.bun/_bun"
     "${HOME}/.oh-my-zsh/oh-my-zsh.sh"
@@ -207,7 +203,7 @@ main() {
     init)
       install_packages
       install_bun
-      install_opencode
+      install_opencode2
       install_oh_my_zsh
       restow
       ensure_theme

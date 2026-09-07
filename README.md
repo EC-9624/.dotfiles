@@ -21,15 +21,15 @@ cd ~/Code/dotfiles
 
 ## OpenCode
 
-OpenCode 2 is the primary install and runs as `opencode` from `~/.opencode/bin`. It uses its built-in managed background service:
+OpenCode 2 runs as `opencode2` from `~/.opencode/bin`. Keep the official executable name so built-in updates can detect the installation. It uses its built-in managed background service:
 
 ```bash
-opencode service status
-opencode api get /api/health
-opencode pair
+opencode2 service status
+opencode2 api get /api/health
+opencode2 pair
 ```
 
-The service listens on localhost by default. For remote access on a trusted network, run `opencode service set hostname 0.0.0.0`, then use `opencode pair` to authenticate remote clients.
+The service listens on localhost by default. For remote access on a trusted network, run `opencode2 service set hostname 0.0.0.0`, then use `opencode2 pair` to authenticate remote clients.
 
 ## Themes
 
