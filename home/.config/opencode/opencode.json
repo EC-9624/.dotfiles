@@ -50,40 +50,6 @@
           }
         }
       }
-    },
-    "anthropic": {
-      "models": {
-        "claude-opus-4-8": {
-          "settings": {
-            "thinking": {
-              "type": "adaptive",
-              "display": "summarized"
-            },
-            "effort": "max"
-          }
-        },
-        "claude-opus-4-7": {
-          "settings": {
-            "thinking": {
-              "type": "adaptive",
-              "display": "summarized"
-            },
-            "effort": "max"
-          }
-        },
-        "claude-opus-4-5": {
-          "headers": {
-            "anthropic-beta": "context-1m-2025-08-07"
-          },
-          "limit": {
-            "context": 1000000,
-            "output": 64000
-          },
-          "settings": {
-            "effort": "high"
-          }
-        }
-      }
     }
   },
   "mcp": {
@@ -103,10 +69,6 @@
       "metabase": {
         "type": "remote",
         "url": "https://metabase.prtimes-tools.jp/api/metabase-mcp"
-      },
-      "excalidraw": {
-        "type": "remote",
-        "url": "https://mcp.excalidraw.com"
       }
     }
   },
