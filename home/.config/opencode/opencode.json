@@ -31,22 +31,117 @@
   "providers": {
     "openai": {
       "models": {
+        "gpt-6-astra": {
+          "limit": {
+            "context": 525000,
+            "input": 525000,
+            "output": 128000
+          }
+        },
+        "gpt-6-astra-fast": {
+          "limit": {
+            "context": 525000,
+            "input": 525000,
+            "output": 128000
+          }
+        },
         "gpt-5.6-sol": {
           "limit": {
-            "context": 272000
+            "context": 525000,
+            "input": 525000,
+            "output": 128000
           },
           "settings": {
             "reasoningSummary": "auto",
             "include": ["reasoning.encrypted_content"]
           }
         },
+        "gpt-5.6-sol-fast": {
+          "limit": {
+            "context": 525000,
+            "input": 525000,
+            "output": 128000
+          }
+        },
         "gpt-5.6-luna": {
           "limit": {
-            "context": 1000000
+            "context": 1050000,
+            "input": 922000,
+            "output": 128000
           },
           "settings": {
             "reasoningSummary": "auto",
             "include": ["reasoning.encrypted_content"]
+          }
+        },
+        "gpt-5.6-luna-fast": {
+          "limit": {
+            "context": 1050000,
+            "input": 922000,
+            "output": 128000
+          }
+        },
+        "gpt-5.6-terra": {
+          "limit": {
+            "context": 525000,
+            "input": 525000,
+            "output": 128000
+          }
+        },
+        "gpt-5.6-terra-fast": {
+          "limit": {
+            "context": 525000,
+            "input": 525000,
+            "output": 128000
+          }
+        },
+        "gpt-5.5": {
+          "limit": {
+            "context": 525000,
+            "input": 525000,
+            "output": 128000
+          }
+        },
+        "gpt-5.5-fast": {
+          "limit": {
+            "context": 525000,
+            "input": 525000,
+            "output": 128000
+          }
+        },
+        "gpt-5.4-mini": {
+          "limit": {
+            "context": 200000,
+            "input": 200000,
+            "output": 128000
+          }
+        },
+        "gpt-5.4-mini-fast": {
+          "limit": {
+            "context": 200000,
+            "input": 200000,
+            "output": 128000
+          }
+        },
+        "gpt-5.4": {
+          "limit": {
+            "context": 525000,
+            "input": 525000,
+            "output": 128000
+          }
+        },
+        "gpt-5.4-fast": {
+          "limit": {
+            "context": 525000,
+            "input": 525000,
+            "output": 128000
+          }
+        },
+        "gpt-5.3-codex-spark": {
+          "limit": {
+            "context": 64000,
+            "input": 64000,
+            "output": 32000
           }
         }
       }
