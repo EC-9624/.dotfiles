@@ -7,10 +7,6 @@ plugins=(git)
 fpath=(/opt/homebrew/share/zsh-completions $fpath)
 source "$ZSH/oh-my-zsh.sh"
 
-# environment
-unset OPENCODE_DISABLE_DEFAULT_PLUGINS OPENCODE_SERVER_URL
-unfunction opencode opencode2 2>/dev/null
-
 # vim editing
 set -o vi
 
